@@ -1,8 +1,3 @@
----
-title: Parsing Text and Clean Up
-slug: parsing-text-clean-up
----
-
 Once we have a corpus, we first need to clean up the text to make sure we parse and count only legitimate words, excluding any HTML tags or symbols. Here's an example sentence found in the Ron Paul corpus:
 
 > *The belief that money created out of thin air can work economic miracles, if only properly “managed,” is pervasive in D.C.*

@@ -1,8 +1,3 @@
----
-title: Tokenization
-slug: tokenization
----
-
 With a cleaned-up source text, we can now tackle the more nuanced issues of breaking up the corpus into individual words that can subsequently be counted and reassembled into sentences.
 
 For the purposes of clarity and correct language use, we're going to stop referring to the individual units as "words" and instead use the more correct term *token*. A token is an atomic unit within some collection, and it while many tokens will also be words, not all tokens will be words.

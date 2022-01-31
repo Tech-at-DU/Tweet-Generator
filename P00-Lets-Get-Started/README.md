@@ -1,9 +1,7 @@
-# Let's Get Started
-
 Learning about data structures and data processing is way more fun when you embed it in a project. To do that, let's build a fun and silly tweet generator that generates sentences that sound realistic, but not always sensible.
 
-Here's an example generated sentence from the Ron Paul bot:
-
+> **Here's an example generated sentence from the Ron Paul bot:**
+>
 > What currency are your thoughts on abolishing America's income tax altogether and get others to look into our private communications.
 
 We'll build this step-by-step; diving into the programming and Python you need along the way.
@@ -24,7 +22,8 @@ By the end of this tutorial, you will:
 - parse text documents and store information in data structures
 - implement sampling methods and Markov chains on data sets
 
-> [action] Take a moment to read through these learning outcomes and make a note of how much you already know about each one. You'll look back at this when you are done with the tutorial.
+> [!ATTENTION]
+> Take a moment to read through these learning outcomes and make a note of how much you already know about each one. You'll look back at this when you are done with the tutorial.
 
 ## Prerequisites
 
@@ -55,20 +54,21 @@ As you go through this tutorial, you will regularly update your progress on Gith
 - You are required to commit each new feature or update to Github. These commits represent the minimum commit frequency; feel free to commit more often.
 - You will also regularly deploy updates to your Flask web server on Heroku.
 
-> [action] This tutorial uses starter code:
-
+> [!ATTENTION]
+> This tutorial uses starter code:
+>
 > - Follow the **[Repository Setup Instructions](https://github.com/Tech-at-DU/ACS-1120-Intro-Data-Structures/blob/master/Setup.md)** to set up your Github repository from this starter code.
 > - Add a README.md file to your repo and add information about the project to this file.
-
+>
 > **Commit your code:**
-
+>
 > ```bash
 > $ git add .
 > $ git commit -m 'initial commit after starter code'
 > $ git push
 > ```
 
-## Python Modulesre
+## Python Modules
 
 Our sentence generators will be built as a series of scripts that can be executed directly in the terminal or imported and used in other files. [Modules](https://docs.python.org/3/tutorial/modules.html) are a common pattern in Python that allow us to do both of these things in a single file.
 
@@ -119,28 +119,28 @@ $ pythoqn3 python_quote.py
 He's not the Messiah. He's a very naughty boy!
 ```
 
-> [action]
-
-> Write the **python_quote** module:
-
-> - In your tutorial repository (created from the starter code): create a **python_quote.py** file and copy the code above into it.
-> - Verify that you can execute **python_quote.py** directly from the terminal.
-> - Create a **quote_user.py** file that imports the **python_quote.py** module and runs the `random_python_quote()` function.
-> - Verify the importing works by executing **quote_user.py** directly from the terminal.
-
+> [!ATTENTION]
+>
+> Write the `python_quote` module:
+>
+> - In your tutorial repository (created from the starter code): create a `python_quote.py` file and copy the code above into it.
+> - Verify that you can execute `python_quote.py` directly from the terminal.
+> - Create a `quote_user.py` file that imports the `python_quote.py` module and runs the `random_python_quote()` function.
+> - Verify the importing works by executing `quote_user.py` directly from the terminal.
+>
 > **Commit your code:**
-
+>
 > ```bash
 > $ git add .
 > $ git commit -m 'Added python_quote module'
 > $ git push
 > ```
 
-# Rearrange Words
+## Rearrange Words
 
 Now that you have a repository and understand the module pattern, let's keep going by writing a basic script with only a few moving parts.
 
-Write a script (_rearrange.py_), that randomly rearranges a set of words provided as command-line arguments to the script.
+Write a script (`rearrange.py`), that randomly rearranges a set of words provided as command-line arguments to the script.
 
 For example, if you run the following command:
 
@@ -164,28 +164,28 @@ $ python3 rearrange.py how now brown cow
 now how cow brown
 ```
 
-> [action]
-
-> Write the **reaarrange.py** script using the requirements above and add it to your tutorial repository
-
+> [!ATTENTION]
+>
+> Write the `reaarrange.py` script using the requirements above and add it to your tutorial repository
+>
 > **Commit your code:**
-
+>
 > ```bash
 > $ git add .
 > $ git commit -m 'Added rearrange module'
 > $ git push
 > ```
+>
 
+> [!INFO]
 > **Note:** From here on, we expect you know how to commit so we won't be adding this code. Make sure you commit after each new feature and use meaningful commit messages.
 
-# Where to Go From Here
+## Where to Go From Here
 
-> [challenge]
-
-> Finished already? If you still have time left, you can keep building off of this idea or try writing other programs that work with words, for example:
-
+> [!TIP]
+>
+> **Finished already? If you still have time left, you can keep building off of this idea or try writing other programs that work with words, for example**:
+>
 > - String reversals: reverse words, sentences
 > - An interactive "mad libs" script
 > - Anagram generator
-
->

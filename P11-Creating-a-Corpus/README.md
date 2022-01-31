@@ -1,8 +1,3 @@
----
-title: Creating a Corpus
-slug: creating-a-corpus
----
-
 The time has come to create our *corpus*: the body of text whose style and tone we want our sentence-generation bot to imitate. In computational linguistics, a set of documents with example text is called a corpus.
 
 ## Choosing a Style

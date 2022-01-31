@@ -1,8 +1,3 @@
----
-title: Time to Tweet
-slug: time-to-tweet
----
-
 The time has come. We've reached the final step. It's time to connect take all of our hard work, to give our bot a body where it can live on and on, generating strange and hilarious non sequiturs for eons to come. Or at least, as long as you can keep it up on Twitter without getting shut down by their spam filter.
 
 In this tutorial, we're going to create a fake Twitter account that we can program to tweet out our generated phrases. When we're finished, your web app will include a "Tweet This" button next to the generated quote which, when pressed, will tweet the quote to the fake Twitter account.

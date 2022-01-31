@@ -1,8 +1,3 @@
----
-title: Performance Analysis
-slug: performance-analysis
----
-
 Because modern computers are so fast, and the scripts we've been writing work with relatively small chunks of data with low computation requirements, it may seem like all programs execute in a split second. This is a good thing when we're in development mode: we want the rapid feedback that fast execution time provides.
 
 However, in the real world, the world of production code, the amount of data can be orders of magnitude larger, and constraints on computation power and memory access may be more restrictive. The difference between two histogram-generating scripts, one which parses a source of 10,000 words in 0.1 seconds vs. one that parses a source of 10,000 words in 0.01 seconds, may not seem like a big difference now.

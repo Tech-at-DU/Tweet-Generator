@@ -1,5 +1,3 @@
-# Flask Web App
-
 By this point, we've built a working program. Which is great. But wouldn't it be better if the whole world could use it, instead of just us?
 
 Yes. Yes it would.
@@ -17,8 +15,8 @@ Before we begin working on the project code, we need to do some work to set up a
 
 When programming, it is common to work on code that will be executed on other computers with their own _environments_ (different operating system, languages and libraries installed, etc.). To ensure that our code will run on other machines, it is important to be clear and explicit about the environmental requirements that our code has. These environmental requirements include things like (in the case of Python):
 
-* Which version of Python do our programs expect?
-* Which version of pip (the Python package manager) are we using?
+* Which version of `python` do our programs expect?
+* Which version of `pip` (the Python package manager) are we using?
 * What libraries and which versions of those libraries do our programs rely upon?
 
 In the world of Python, a commonly accepted solution to the problem of environment management is to use the [virtualenv](https://virtualenv.pypa.io/) tool. Virtualenv is "a tool to create isolated Python environments", meaning that if you use it correctly, you can be sure that you are using _only_ the dependencies specified, and nothing more.
@@ -33,20 +31,23 @@ $ python3 -m venv venv
 
 There is still one more step before `virtualenv` is activated, i.e. before we are _actually_ using our virtual environment instead of our regular one. We need to activate it! Run this command to activate:
 
-	$ source venv/bin/activate
+```bash
+$ source venv/bin/activate
+```
 
 Read up on the [activate script](https://virtualenv.pypa.io/en/latest/userguide.html#activate-script) to learn more about what it does, and try this experiment to prove that it worked:
 
-1. Open two separate command shells (if you're using Terminal.app on a Mac, just open two tabs in the same window).
+1. Open two separate command shells (if you're using `Terminal.app` on a Mac, just open two tabs in the same window).
 2. Navigate to your same project directory in both shells.
-3. In _one_ of the shells, run the command `$ source venv/bin/activate`.
-4. In _both_ shells, run the command `$ which python`.
+3. In _one_ of the shells, run the command `source venv/bin/activate`.
+4. In _both_ shells, run the command `which python`.
 
-You should see two different outputs: in the shell where you ran the activate script, the output of `$ which python` should be the file path to the `python` executable in `./venv/bin/`, while in the other shell it should output the path to the global Python interpreter.
+You should see two different outputs: in the shell where you ran the activate script, the output of `which python` should be the file path to the `python` executable in `./venv/bin/`, while in the other shell it should output the path to the global Python interpreter.
 
 With a `venv` installed and activated, you can rest assured that the Python interpreter you're using is the one that you've specified. In addition, when you install packages with `pip`, you'll be installing them into the `./venv` subdirectory, which means that other Python projects you have will not affect the packages for this one. Pretty neat!
 
-**A word of warning:** it's easy to forget to run `$ source venv/bin/activate` when starting a new shell. If you find yourself running into strange bugs, make sure that you're using the virtual environment by checking the output of `$ which python`.
+> [!INFO]
+> **A word of warning:** it's easy to forget to run `source venv/bin/activate` when starting a new shell. If you find yourself running into strange bugs, make sure that you're using the virtual environment by checking the output of `which python`.
 
 ## Local Development
 
@@ -54,16 +55,20 @@ Let's get a local version of our web app running.
 
 The first step is to download and install the Flask library: [instructions](http://flask.pocoo.org/docs/2.0/installation/).
 
-	$ pip install Flask
+```bash
+$ pip install Flask
+```
 
-Next you want to create a new script file that will be responsible for starting your web server. By convention this file is called `app.py`, but you can call it `server.py` or whatever you like.
+Next you want to create a new script file that will be responsible for starting your web server. By convention this file is called `app.py`, and is already included in the latest version of the starter code. Remember, you can use `git pull upstream master` to fetch any updates from the course repo!
 
 Start by following the instructions in the [Flask quickstart](http://flask.pocoo.org/docs/2.0/quickstart/) to build the most basic Flask app. Once you get it running, you should be able to open a browser and view your app at http://127.0.0.1:5000/ (read as "port 5000 on host 127.0.0.1").
 
-	$ python app.py
-	* Running on http://127.0.0.1:5000/ (Press CTRL+C to quit)
-	* Restarting with stat
-	...
+```bash
+$ python app.py
+* Running on http://127.0.0.1:5000/ (Press CTRL+C to quit)
+* Restarting with stat
+...
+```
 
 Now you'll see that you have a working web app that displays some basic text on a page. It should be fairly obvious what we'd have to change so that each page visit displays our *generated text* instead of a hard-coded string.
 
@@ -110,7 +115,7 @@ $ git subtree push --prefix Code heroku master
 
 Now all your hard work is viewable, on the internet, all the time, for anyone! Rejoice!
 
-## Help! It's Not Working and I Don't Know Why
+## It's Not Working and I Don't Know Why
 
 You may run into errors along the way. It doesn't always work smoothly the first time.
 
@@ -126,10 +131,13 @@ Some issues to be aware of:
 
 ## Where to Go From Here
 
-All finished, with clean and readable code? No? Ok, go do that first. Then, make your web app look better and/or add more features.
-
-- Improve the style of your page (use a nice font, make it bigger, center it, etc.) with CSS.
-- Display more than one generated word on the page.
-- Generate a specific number of words given in a URL query string parameter. For example, visiting `/?num=10` would generate a set of 10 words.
-- Add a button to display a new word (i.e. refresh the page) when clicked.
-- Make a "favorite" button and a `/favorites` route to display all the words that have been "favorited" by users. This is advanced stuff: you'll need to use a database. Not for the faint of heart.
+> [!TIP]
+> **All finished, with clean and readable code?**
+> No? Ok, go do that first. Then, make your web app look better and/or add more features.
+>
+>
+> - Improve the style of your page (use a nice font, make it bigger, center it, etc.) with CSS.
+> - Display more than one generated word on the page.
+> - Generate a specific number of words given in a URL query string parameter. For example, visiting `/?num=10` would generate a set of 10 words.
+> - Add a button to display a new word (i.e. refresh the page) when clicked.
+> - Make a "favorite" button and a `/favorites` route to display all the words that have been "favorited" by users. This is advanced stuff: you'll need to use a database. Not for the faint of heart.

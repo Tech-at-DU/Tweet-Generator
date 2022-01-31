@@ -1,5 +1,3 @@
-# Stochastic Sampling
-
 Now that we can generate histograms (word frequency distributions), the next step is to start pulling words out of the histogram to produce sentences.
 
 Eventually, we'll want this word-selection function to pull out words in an order that makes some kind of sense and is not completely random. Our bot may never be able to speak as well as Siri, but it can at least *approximate* real English grammar.
@@ -8,11 +6,11 @@ Before we get into that territory, we are going to build a program that can gene
 
 Stochastic sampling means taking an element from a given collection at *random*. In this case, we'll start with pure randomness (or at least, as pure as a computer can get) and then introduce probabilistic selection to sample semi-randomly.
 
-> [action]
+> [!ATTENTION]
 >
-Your first task is to write a function that takes a histogram (however you've structured yours) and returns a single word, at random. It should not yet take into account the distributions of the words.
+> Your first task is to write a function that takes a histogram (however you've structured yours) and returns a single word, at random. It should not yet take into account the distributions of the words.
 >
-It should work something like this:
+> It should work something like this:
 
 ```bash
 $ python3 sample.py one fish two fish red fish blue fish
@@ -46,23 +44,22 @@ For example, when using the sentence above, our sampling function should return 
 The probabilities for each word in the sample sentence are as follows:
 
 ```bash
-	one  => 0.125
-	fish => 0.5
-	two  => 0.125
-	red  => 0.125
-	blue => 0.125
+one  => 0.125
+fish => 0.5
+two  => 0.125
+red  => 0.125
+blue => 0.125
 ```
 
 Or, put in percentages, 50% for `'fish'`, and 12.5% for all the rest.
 
-> [action]
+> [!ATTENTION]
 >
-There are many ways to use relative probabilities to generate these words. See if you can devise your own strategy, and then make improvements to it by comparing your work with your peers and examples you find online.
->
+> There are many ways to use relative probabilities to generate these words. See if you can devise your own strategy, and then make improvements to it by comparing your work with your peers and examples you find online.
 
 Ready? Go code!
 
-## Help! What is all this Stochastic Madness?
+## What is this Stochastic Madness?
 
 If you're feeling overwhelmed by the frustrating indeterminacy of all this, you're not alone. One of the nice, pleasant, comforting things about computer programming is working with perfectly reproducible, empirical processes. In general, it is best to design software that will produce the same outputs when given the same inputs.
 
@@ -73,20 +70,21 @@ If you're having trouble telling whether or not the probabilities you are design
 For example, to test that my probabilistic word sampler program was working correctly, I selected a random word from the histogram 10,000 times and then looked at how frequently each word was selected:
 
 ```bash
-	blue => 1295
-	fish => 5048
-	red  => 1207
-	two  => 1209
-	one  => 1241
+blue => 1295
+fish => 5048
+red  => 1207
+two  => 1209
+one  => 1241
 ```
 
 None of these numbers are clean, round numbers. But that's fine, because the relative probability reflects what I expect (and designed for): `'fish'` appears about 4 times as often as each of the other words, which all appear in roughly the same frequency. It's tough to prove perfect randomness, but so long as the sample size is big enough and the outcomes match what's expected, we can be mostly certain that we've reached correctness.
 
 ## Where to Go From Here
 
-Finished already? If you still have time left, make your code readable. Then optimize and experiment:
-
-- Optimize for speed of sampling (read time)
-- Optimize for memory (use the least amount of space)
-- Solve with only lists and tuples (no dictionaries)
-- Combine other weighting techniques besides on top of the frequency weighting (e.g. weight words that begin with a vowel more than others)
+> [!TIP]
+> **Finished already?** If you still have time left, make your code readable. Then optimize and experiment:
+>
+> - Optimize for speed of sampling (read time)
+> - Optimize for memory (use the least amount of space)
+> - Solve with only lists and tuples (no dictionaries)
+> - Combine other weighting techniques besides on top of the frequency weighting (e.g. weight words that begin with a vowel more than others)

@@ -1,8 +1,3 @@
----
-title: Markov Chains Revisited
-slug: markov-chains-revisited
----
-
 Let's take a look at another tiny corpus:
 
 > *I went left, you went right, I went left, I went right,*
