@@ -21,7 +21,7 @@ tokens.py       # Module for creating lists of tokens from a text
 word_count.py   # wo
 sample.py       # Module for generating a sample word from a histogram
 sentence.py     # Module for generating a sentence from a histogram
-```bash
+```
 
 The primary interface to this application could be something like:
 
