@@ -4,7 +4,7 @@ For the purposes of clarity and correct language use, we're going to stop referr
 
 Let's use an example to discuss the difference between words and tokens. Say this is your source text:
 
-	An on-demand water heater is a more "green" solution than traditional heaters.
+    An on-demand water heater is a more "green" solution than traditional heaters.
 
 The component *words* in this sentence are:
 
@@ -63,18 +63,18 @@ This text is stored in the file `snippet.txt`. Then let's set up a skeleton `tok
 
 ```python
 def tokenize(text):
-	tokens = []
-	return tokens
+    tokens = []
+    return tokens
 
 if __name__ == '__main__':
-	import sys
-	if len(sys.argv) > 1:
-		filename = sys.argv[1]
-		source = open().read()
-		tokens = tokenize(source)
-		print(tokens)
-	else:
-		print('No source text filename given as argument')
+    import sys
+    if len(sys.argv) > 1:
+        filename = sys.argv[1]
+        source = open().read()
+        tokens = tokenize(source)
+        print(tokens)
+    else:
+        print('No source text filename given as argument')
 ```
 
 Now we can test this script by running
@@ -86,17 +86,17 @@ $ python tokenize.py snippet.txt
 Although of course at this point it doesn't do anything. So let's start by splitting the text in the source into tokens using whitespace as a delimiter:
 
 ```python
-	import re
+import re
 
-	def tokenize(text):
-		tokens = split_on_whitespace(text)
-		return tokens
+def tokenize(text):
+    tokens = split_on_whitespace(text)
+    return tokens
 
-	def split_on_whitespace(text):
-		return re.split('\s+', text)
+def split_on_whitespace(text):
+    return re.split('\s+', text)
 
-	if __name__ == '__main__':
-		# ...
+if __name__ == '__main__':
+    # ...
 ```
 
 Now we get a real list as our output:
@@ -110,14 +110,14 @@ And then we can add extra functions to further refine our list of tokens. First 
 
 ```python
 def tokenize(text):
-	no_punc_text = remove_punctuation(text)
-	tokens = split_on_whitespace(no_punc_text)
-	return tokens
+    no_punc_text = remove_punctuation(text)
+    tokens = split_on_whitespace(no_punc_text)
+    return tokens
 
 def remove_punctuation(text):
-	no_punc_text = re.sub('[,.()]', '', text)
-	no_punc_text = re.sub('--', ' ', no_punc_text)
-	return no_punc_text
+    no_punc_text = re.sub('[,.()]', '', text)
+    no_punc_text = re.sub('--', ' ', no_punc_text)
+    return no_punc_text
 
 # ...
 ```
