@@ -65,6 +65,7 @@ Once you have your source, you are ready to write your program. Here are the spe
 ## Where to Go From Here
 
 > [!TIP]
+>
 > **Finished already?** If you still have time left, make your code readable. Then optimize and experiment:
 >
 > - Benchmark and optimize! How can you make your program as performant as possible? If you optimize for reading and not for writing, how can you improve your program? Don't be afraid to try different data structures, and tweak those algorithms!

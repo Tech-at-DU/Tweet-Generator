@@ -23,9 +23,9 @@ Pick three or more data structures from the list below and implement a histogram
 - Analyze the `count` operation's algorithm to identify its time complexity with Big-O notation.
 - Benchmark the `count` operation's actual running time with small and large histogram sizes (for example, 100 and 10000 unique word types)
 
-> [info]
+> [!INFO]
 >
-Hint: when benchmarking, you may need to run the same function many times to get a big enough sample size for measurement. For instance, you could run a loop that calls `histogram.count('word')` 1000 times.
+> **Hint**: when benchmarking, you may need to run the same function many times to get a big enough sample size for measurement. For instance, you could run a loop that calls `histogram.count('word')` 1000 times.
 
 Here are some data structure options to choose from, in approximate order of complexity/difficulty:
 
@@ -38,16 +38,15 @@ Here are some data structure options to choose from, in approximate order of com
 7. [Doubly linked list](https://en.wikipedia.org/wiki/Linked_list#Doubly_linked_list)
 8. [Binary search tree](https://en.wikipedia.org/wiki/Binary_search_tree)
 9. [Trie](https://en.wikipedia.org/wiki/Trie) or [radix tree](https://en.wikipedia.org/wiki/Radix_tree)
-10. * wild card - choose your own!
+10. `*` wild card - choose your own!
 
 When you're finished, you should have a better sense of what is meant by algorithmic complexity and how it can affect the performance of your code. Remember, though, that you don't get a free pass for writing sloppy code just because it performs well. Good naming and code structure are all essential, especially when refactoring for performance optimization!
 
-> [action]
+> [!ATTENTION]
 >
-If you haven't started coding yet, then go code!
+> If you haven't started coding yet, then go code!
 
-Help! What is algorithm analysis and how do I do it?
-==
+## What is Algorithm Analysis? How do I do it?
 
 No worries if you haven't done algorithmic analysis before. Let's walk through an example implementation, and then analyze and benchmark it together.
 
@@ -55,70 +54,77 @@ For this implementation, we're going to keep it simple and use a list of tuples 
 
 So, let's start out by writing a `make_histogram` function that takes a list of words and returns a list of tuples (which will be pairs of words along with their count). Start with some pseudocode:
 
-	def make_histogram(words):
-	    # create a new list called hgram
-	    # for each word in the list of words
-	    #    check if word has been counted already
-	    #    if word is not in histogram
-	    #        add a new word-count pair to hgram (count is one)
-	    #    if word is already in hgram
-	    #        find its current count
-	    #        make a new word-count pair with
-	    #         the same word and the current count plus one
-	    #        replace the word-count pair with the new pair
-	    # when all words have been read, return the hgram
+```python
+def make_histogram(words):
+# create a new list called hgram
+# for each word in the list of words
+#    check if word has been counted already
+#    if word is not in histogram
+#        add a new word-count pair to hgram (count is one)
+#    if word is already in hgram
+#        find its current count
+#        make a new word-count pair with
+#         the same word and the current count plus one
+#        replace the word-count pair with the new pair
+# when all words have been read, return the hgram
+```
 
 This looks like a decent description of the algorithm for creating a histogram. If you haven't yet made a histogram using a list of tuples, try to do it before looking at the solution:
 
-> [solution]
+<!-- > [solution]
 >
-	def make_histogram(words):
-	    hgram = []                           # create a new list called hgram
-	    for word in words:                   # for each word in the list of words
-	        index = find(word, hgram)        # check if word is in hgram already
-	        if index == None:                # if word is not in histogram
-	            hgram.append((word, 1))      # add a new word-count pair to hgram
-	        else:                            # if word is already in hgram
-	            count = hgram[index][1]      # find its current count
-	            new_pair = (word, count + 1) # make a new word-count pair
-	            hgram[index] = new_pair      # replace word-count pair
-	    return hgram                         # return the hgram
+    def make_histogram(words):
+        hgram = []                           # create a new list called hgram
+        for word in words:                   # for each word in the list of words
+            index = find(word, hgram)        # check if word is in hgram already
+            if index == None:                # if word is not in histogram
+                hgram.append((word, 1))      # add a new word-count pair to hgram
+            else:                            # if word is already in hgram
+                count = hgram[index][1]      # find its current count
+                new_pair = (word, count + 1) # make a new word-count pair
+                hgram[index] = new_pair      # replace word-count pair
+        return hgram                         # return the hgram -->
 
 Notice that in writing this `make_histogram` function, we used a function that doesn't yet exist: `find`. We could have included the steps here, but the implementation details of finding a word are not the responsibility of `make_histogram`, so it is better to use a separate function. We already have some explicit expectations about how it should work: it will take a word and the histogram, and then return either the index of the matching word-count pair or `None` if the word does not exist in the histogram.
 
-With those expectations defined, we can write that `find` function:
+<!-- With those expectations defined, we can write that `find` function:
 
 > [solution]
 >
-	def find(item, hgram):
-	    for index, pair in enumerate(hgram):
-	        if pair[0] == item:
-	            return index
-	    return None
+    def find(item, hgram):
+        for index, pair in enumerate(hgram):
+            if pair[0] == item:
+                return index
+        return None
 >
-Note the use of the enumerate() built-in function to include an index with the iteration.
+Note the use of the enumerate() built-in function to include an index with the iteration. -->
 
 To test that these functions work as expected, we need some sample data. Ideally it should be ordered and predictably structured so that we can reason about it easily. You can use some of the text you've downloaded. In this case, we'll use a subset of the word list at `/usr/share/dict/words` since we know these will yield a set number of unique words.
 
 Here's a simple utility function that will return the first `n` words from `/usr/share/dict/words`:
 
-	def list_of_words(length):
-	    dict_words = '/usr/share/dict/words'
-	    words_str  = open(dict_words, 'r').read()
-	    all_words  = words_str.split("\n")
-	    return all_words[0:length]
-
+```python
+def list_of_words(length):
+    dict_words = '/usr/share/dict/words'
+    words_str  = open(dict_words, 'r').read()
+    all_words  = words_str.split("\n")
+    return all_words[0:length]
+```
 With this, we can easily generate lists of unique words with a specific size:
 
-	list_of_words(5)  # => ['A', 'a', 'aa', 'aal', 'aalii']
-	list_of_words(10) # => ['A', 'a', 'aa', 'aal', 'aalii', 'aam', 'Aani', 'aardvark', 'aardwolf', 'Aaron']
+```python
+list_of_words(5)  # => ['A', 'a', 'aa', 'aal', 'aalii']
+list_of_words(10) # => ['A', 'a', 'aa', 'aal', 'aalii', 'aam', 'Aani', 'aardvark', 'aardwolf', 'Aaron']
+```
 
 Now we can test our `make_histogram` and `find` functions:
 
-	word_list = list_of_words(5)
-	hgram = make_histogram(word_list) # => [('A', 1), ('a', 1), ('aa', 1), ...]
-	find('aal', hgram) == 3      # => True
-	find('zoo', hgram) == None   # => True
+```python
+word_list = list_of_words(5)
+hgram = make_histogram(word_list) # => [('A', 1), ('a', 1), ('aa', 1), ...]
+find('aal', hgram) == 3      # => True
+find('zoo', hgram) == None   # => True
+```
 
 Got it? If you're unclear, make sure to write this code for yourself and test it.
 
@@ -126,43 +132,49 @@ Now we're ready to write our `count` function, which is what we really want to a
 
 Remember that `count` takes the word to search for as well as the histogram object, and then returns the word frequency count. Here's one way to implement it, making use of the existing `find` function written already:
 
-	def count(word, hgram):
-	    index = find(word, hgram)
-	    if index:
-	        word_count_pair = hgram[index]
-	        return word_count_pair[1]
-	    else:
-	        return 0
+```python
+def count(word, hgram):
+    index = find(word, hgram)
+    if index:
+        word_count_pair = hgram[index]
+        return word_count_pair[1]
+    else:
+        return 0
+```
 
 To test `count`, we should make sure that our source has at least some duplicate words. Otherwise every word will have a count of 1, and that leaves a lot of room for false positives. Here's some tests to prove that `count` works as expected:
 
-	word_list = list_of_words(5)
-	word_list.append('aal')
-	word_list.append('a')
-	word_list.append('a')
-	hgram = make_histogram(word_list)  # => [('A', 1), ('a', 3), ('aa', 1), ...]
-	count('a', hgram) == 3)      # => True
-	count('aal', hgram) == 2)    # => True
-	count('aalii', hgram) == 1)  # => True
-	count('zoo', hgram) == 0)    # => True
+```python
+word_list = list_of_words(5)
+word_list.append('aal')
+word_list.append('a')
+word_list.append('a')
+hgram = make_histogram(word_list)  # => [('A', 1), ('a', 3), ('aa', 1), ...]
+count('a', hgram) == 3)      # => True
+count('aal', hgram) == 2)    # => True
+count('aalii', hgram) == 1)  # => True
+count('zoo', hgram) == 0)    # => True
+```
 
 Ok, now we have something to work with: a functional `count` function that we can analyze and benchmark.
 
 Let's start with the algorithm analysis to find the Big-O complexity of this function. Read this explanation of Big-O notation to get familiar with the concept:
 
-> [info]
+> [!INFO]
 >
-When doing algorithm analysis, we need to look for are all of the individual computations that make up a particular algorithm and determine which of them are constant time (also known as O(1)) (i.e. they will always take roughly the same amount of time to compute), which are linear time or O(n) (i.e. time to compute will increase by one time-unit with every additional data-unit added), and which are quadratic time or O(n^2) (i.e time to compute will increase quadratically, as the square of the number of data-units being computed). There are other kinds of complexities, but for now we'll just deal with these three.
+> When doing algorithm analysis, we need to look for are all of the individual computations that make up a particular algorithm and determine which of them are constant time (also known as `O(1)`) (i.e. they will always take roughly the same amount of time to compute), which are linear time or `O(n)` (i.e. time to compute will increase by one time-unit with every additional data-unit added), and which are quadratic time or `O(n^2`) (i.e time to compute will increase quadratically, as the square of the number of data-units being computed). There are other kinds of complexities, but for now we'll just deal with these three.
 
 With that in mind, let's break up the `count` function into its component computations and identify the Big-O complexity of each computation. Here's the function definition, with comments identifying the computations:
 
-	def count(word, hgram):
-	    index = find(word, hgram)          # 1. call the find function; 2. assign variable
-	    if index:                          # 3. evaluate conditional
-	        word_count_pair = hgram[index] # 4. access list element; 5. assign variable
-	        return word_count_pair[1]      # 6. access list element
-	    else:
-	        return 0
+```python
+def count(word, hgram):
+    index = find(word, hgram)          # 1. call the find function; 2. assign variable
+    if index:                          # 3. evaluate conditional
+        word_count_pair = hgram[index] # 4. access list element; 5. assign variable
+        return word_count_pair[1]      # 6. access list element
+    else:
+        return 0
+```
 
 Written another way, here's a list of all the component computations in `count`:
 
@@ -179,32 +191,32 @@ The Big-O complexity of `count` can be written as:
 
 O( [complexity of `find` function call] + [complexity of variable assignment] + [complexity of remaining steps...] )
 
-> [action]
+> [!ATTENTION]
 >
-Try to figure out the Big-O complexity for each computation step for yourself, and then keep reading.
+> Try to figure out the Big-O complexity for each computation step for yourself, and then keep reading.
 
-<!--- html comment to break boxes -->
+<!---
 > [solution]
 >
 Ok, so what are the Big-O runtime for each of the computations in `count`?
 >
-The first step, `find(word, hgram)` is a function call, which is equal to whatever time it takes to execute the actual function. Because `find` iterates through each element of the `hgram` list, it has O(n) time. If `hgram` has 10 elements, the maximum number of iterations is 10. But for 1000 elements, the maximum number of iterations is 1000. So we see that the computation time (number of iterations) grows in direct proportion to the number (n) of elements in the list, giving it an O(n) runtime.
+The first step, `find(word, hgram)` is a function call, which is equal to whatever time it takes to execute the actual function. Because `find` iterates through each element of the `hgram` list, it has `O(n)` time. If `hgram` has 10 elements, the maximum number of iterations is 10. But for 1000 elements, the maximum number of iterations is 1000. So we see that the computation time (number of iterations) grows in direct proportion to the number (`n`) of elements in the list, giving it an O(n) runtime.
 >
 The rest of the steps (assign variable, access a list element, etc.) are all constant time, because the size of the data doesn't affect how long it takes to perform these tasks. Or rather, it doesn't influence the time in a way that is significant to its Big-O complexity.
 >
 So, we can simplify our Big-O complexity for `count` to this:
 >
-O( n + 1 + 1 + 1 + 1 + 1 )
+`O( n + 1 + 1 + 1 + 1 + 1 )`
 >
 Because the complexity of `find` is O(n) and all other computations are O(1). Then we can simplify:
 >
-O( n + 5 )
+`O( n + 5 )`
 >
 And because Big-O doesn't care about constants, we can drop those too, leaving us with our final answer: `count` has a runtime complexity of `O(n)`. Success!
+-->
 
+## Benchmarking your Code
 
-Benchmarking your Code
-==
 The last step is to benchmark this function to see how much time it takes to run. This information will not be particularly useful on its own, but comes in very handy when comparing two different algorithms.
 
 To benchmark our code, we'll use the [timeit module](https://docs.python.org/3/library/timeit.html?highlight=timeit#module-timeit).
@@ -213,41 +225,53 @@ There are several steps to benchmarking; it's important to be careful when setti
 
 The first step is to set up the program state that is not being timed, so that we can isolate only the part of the program we do want to time. In this case, we'll create two histograms: one with 100 words, and another with 10,000:
 
-	hundred_words       = list_of_words(100)
-	ten_thousand_words  = list_of_words(10000)
+```python
+hundred_words       = list_of_words(100)
+ten_thousand_words  = list_of_words(10000)
 
-	hundred_hgram       = make_histogram(hundred_words)
-	ten_thousand_hgram  = make_histogram(ten_thousand_words)
+hundred_hgram       = make_histogram(hundred_words)
+ten_thousand_hgram  = make_histogram(ten_thousand_words)
+```
 
 That gives us two histogram objects to pass to our benchmarked `count` call. Next we'll need a word to search for, and to really push our function we'll search for the last word in the original list:
 
-	hundred_search      = hundred_words[-1]
-	ten_thousand_search = ten_thousand_words[-1]
+```python
+hundred_search      = hundred_words[-1]
+ten_thousand_search = ten_thousand_words[-1]
+```
 
 Now we have both of our arguments needed to call `count`, so we can import the `timeit` module, set up a statement to time, and create a new timer:
 
-	stmt  = "count('{}', hundred_hgram)".format(hundred_search)
-	setup = "from __main__ import count, hundred_hgram"
-	timer = timeit.Timer(stmt, setup=setup)
+```python
+stmt  = "count('{}', hundred_hgram)".format(hundred_search)
+setup = "from __main__ import count, hundred_hgram"
+timer = timeit.Timer(stmt, setup=setup)
+```
 
 Note that the `Timer` doesn't have access to our functions or variables by default, which is why we need to include the `setup` argument to import them.
 
 With the timer set up, we then define a number of executions (how many times `stmt` will be run), run the timer, and print out the result with a friendly message:
 
-	iterations = 10000
-	result = timer.timeit(number=iterations)
-	print("count time for 100-word histogram: " + str(result))
+```python
+iterations = 10000
+result = timer.timeit(number=iterations)
+print("count time for 100-word histogram: " + str(result))
+```
 
 Running that on my machine, I can see how many seconds it takes!
 
-	$ python histogram_benchmark.py
-	count time for 100-word histogram: 0.07999536900024395
+```bash
+$ python histogram_benchmark.py
+count time for 100-word histogram: 0.07999536900024395
+```
 
 Repeat the same steps to test the 10,000 word histogram:
 
-	$ python histogram_benchmark.py
-	count time for 100-word histogram: 0.07999536900024395
-	count time for 10,000-word histogram: 8.522602347999054
+```bash
+$ python histogram_benchmark.py
+count time for 100-word histogram: 0.07999536900024395
+count time for 10,000-word histogram: 8.522602347999054
+```
 
 Comparing that benchmark with the complexity analysis before, we see that `count` does indeed grow in linear time, or O(n), because it takes 100 times as long to find the frequency of a word in a 10,000 word histogram as it does in a 100-word histogram.
 
@@ -255,9 +279,11 @@ With that, our benchmarking practice proved our analysis theory! Experiment succ
 
 Now we just have to do the same thing for the other data structures...
 
-Where to Go From here
-==
-Finished already? You've analyzed, benchmarked, and cleaned up your code? Ok great, here are some further investigations you can attempt:
+## Where to Go From Here
 
-- Write functions to insert, update, and delete items in the histogram and analyze/benchmark them.
-- Restructure your histogram implementations as classes with their own methods for searching, inserting, updating, and deleting.
+> [!TIP]
+>
+> **Finished already? You've analyzed, benchmarked, and cleaned up your code?** Ok great, here are some further investigations you can attempt:
+>
+> - Write functions to insert, update, and delete items in the histogram and analyze/benchmark them.
+> - Restructure your histogram implementations as classes with their own methods for searching, inserting, updating, and deleting.

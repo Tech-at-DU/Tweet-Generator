@@ -62,6 +62,7 @@ Once you are ready to work with the `words` file, make sure to design the steps 
 Finally, you have a few data types to choose from when you need to store the words. If you're unfamiliar with Python, try starting with the list data type, which stores an ordered list of objects (like strings, numbers, etc.).
 
 > [!ATTENTION]
+>
 > Write the `dictonary_words.py` script:
 >
 > - read in the `words` file
@@ -69,14 +70,13 @@ Finally, you have a few data types to choose from when you need to store the wor
 > - put the number of words requested together into a "sentence"
 > - output your sentence
 >
->
 > **Commit your code.**
 
 ## Where to Go From Here
 
 > [!TIP]
 >
-> Finished already? If you still have time left, take your program further or explore other ideas, for example:
+> **Finished already? If you still have time left, take your program further or explore other ideas, for example**:
 >
 > - Make it fast! Can you optimize this program to generate sentences more quickly? Make sure to benchmark your script before and after optimizations.
 > - Write your own vocabulary study game: flash a word, player has to guess the definition, then is shown the definition.
