@@ -4,11 +4,15 @@ Once we have a corpus, we first need to clean up the text to make sure we parse 
 
 Fortunately, Diffbot extracts the relevant text from the soup of HTML tags, converting this:
 
-	<p><font face="Times New Roman, Times, serif" size="3">The belief that money created out of thin air can work economic miracles, if only properly &#147;managed,&#148; is pervasive in D.C. </font></p>
+```html
+<p><font face="Times New Roman, Times, serif" size="3">The belief that money created out of thin air can work economic miracles, if only properly &#147;managed,&#148; is pervasive in D.C. </font></p>
+```
 
 into this:
 
-	The belief that money created out of thin air can work economic miracles, if only properly &#147;managed,&#148; is pervasive in D.C.
+```txt
+The belief that money created out of thin air can work economic miracles, if only properly &#147;managed,&#148; is pervasive in D.C.
+```
 
 However, we're still left with smart-quotes around *“managed”* that are HTML-encoded (if you search for `&#147;` or any other HTML character code on Google, it will convert the code to its corresponding character).
 
@@ -28,12 +32,12 @@ One important piece to keep in mind, however, is that as you keep developing thi
 
 You'll want to change your clean-up parser to remove those characters, so it is a good idea to *design your parser so that it is easy to modify in the future.* There are many techniques to encourage this, some important ones being: proper naming of variables and functions, separating concerns, and writing many small & specific functions instead of a few large and general-purpose ones.
 
-> [action]
+> [!ATTENTION]
 >
-Got it? Ok great, now go code your text parser to clean up your corpus!
+> Got it? Ok great, now go code your text parser to clean up your corpus!
 
-Help! I Can't Parse this Parsing Stuff!
-==
+## Help! I Can't Parse this Parsing Stuff!
+
 Parsing may seem daunting, but you'll soon realize that it's conceptually quite simple. Additionally, there are plenty of tools in the Python core language and standard library to help us out.
 
 To help wrap your head around parsing, start off by tackling a more manageable chunk of text like a short sentence. This technique of starting small and learning through rapid experimentation is one you've probably noticed being encouraged over and over, and is one that you should reach for as second-nature soon enough.
@@ -53,19 +57,20 @@ Some tools you may find useful (by no means an exhaustive list, just a starting 
 - [html library](https://docs.python.org/2/library/html.html) reference
 - [Dive Into Python chapter on regular expressions](http://www.diveintopython.net/regular_expressions/)
 
-Where to Go From Here
-==
-Finished already? If you still have time left, make your code readable. Then improve design and performance.
+## Where to Go From Here
 
-- Is your parser as fast as it could be? What is the difference between using regular expressions and character-by-character iteration?
-- Modify your parser so that it can be used as both a module (imported by another script) and as a stand-alone, executable script that, when invoked from the command line with a file argument, will print out the cleaned-up version, which can be redirected into a file, like below.
-
-```
-	$ cat source.txt
-	We _really_ love parsing &#38; tokenization.
-
-	$ python cleanup.py source.txt
-	We really love parsing & tokenization.
-
-	$ python cleanup.py source.txt > cleaned-up.txt
-```
+> [!TIP]
+> **Finished already?** If you still have time left, make your code readable. Then improve design and performance.
+>
+> - Is your parser as fast as it could be? What is the difference between using regular expressions and character-by-character iteration?
+> - Modify your parser so that it can be used as both a module (imported by another script) and as a stand-alone, executable script that, when invoked from the command line with a file argument, will print out the cleaned-up version, which can be redirected into a file, like below.
+>
+> ```bash
+> $ cat source.txt
+> We _really_ love parsing &#38; tokenization.
+>
+> $ python cleanup.py source.txt
+> We really love parsing & tokenization.
+>
+> $ python cleanup.py source.txt > cleaned-up.txt
+> ```
