@@ -96,6 +96,14 @@ Luckily for us, Heroku has a great guide on getting started with Python apps. Fo
 
 Once you have all the pieces in place, publishing your app to Heroku is a single command:
 
+For those of you with `app.py` in the root of your folder, please run:
+
+```bash
+$ git push heroku master
+```
+
+If you're running the code from within a subfolder in your project, please run:
+
 ```bash
 $ git subtree push --prefix Code heroku master
 ```
