@@ -1,7 +1,4 @@
----
-title: Flask Web App
-slug: flask-web-app
----
+# Flask Web App
 
 By this point, we've built a working program. Which is great. But wouldn't it be better if the whole world could use it, instead of just us?
 
@@ -14,8 +11,7 @@ If you're unfamiliar with Flask, that's fine – you'll be able to pick it up qu
 
 The goal for this tutorial is to create a web app with an index or home route that displays a freshly-generated word with each page load. We'll develop this web application locally first, and then publish to Heroku later so that anyone on the web can see it.
 
-Environment Setup
-==
+## Environment Setup
 
 Before we begin working on the project code, we need to do some work to set up a proper development environment.
 
@@ -29,23 +25,11 @@ In the world of Python, a commonly accepted solution to the problem of environme
 
 For our purposes, we'll be using `virtualenv` to ensure that we use the right version of Python to execute our programs and that the packages we install with `pip` will be isolated from our larger development environments (i.e. the other programs and applications on our computer). What this means is that we'll be able to use the `python` command to run programs with only the version we've specified, and all packages we install with `pip` will be installed into a local directory, not a global one.
 
-Use this tutorial to a virtual environment set up with `virtualenv`, though you can [read more about virtual environments in Python in this Python Guide](http://docs.python-guide.org/en/latest/dev/virtualenvs/).
+Since `virtualenv` is bundled with Python, all you need to do is run this command to create a new virtual environment:
 
-To start, follow the [installation instructions](https://virtualenv.pypa.io/en/latest/installation.html) to get yourself a copy of the `virtualenv` program. To verify that you've installed correctly, run the command `$ which virtualenv` and you should see the path for the virtualenv executable.
-
-Once we have the `virtualenv` command installed, we will use it to create a new virtual environment in a subdirectory of our project called `venv`. However, we also want to make sure that we create a virtual environment using the correct version of Python. So we'll use the `-p` flag of the `virtualenv` command to specify a Python interpreter to use.
-
-First, find out the file path to Python by running this command:
-
-	$ which python
-
-On my machine, this outputs `/usr/local/bin/python`, but it might be different for you.
-
-Then, run the `virtualenv` command supplying the path to the Python interpreter with the `-p` flag, followed by the name of the virtual environment directory, in this case `venv`:
-
-	$ virtualenv -p /path/to/python venv
-
-You should see some nice logging output telling you what `virtualenv` is doing.
+```bash
+$ python3 -m venv venv
+```
 
 There is still one more step before `virtualenv` is activated, i.e. before we are _actually_ using our virtual environment instead of our regular one. We need to activate it! Run this command to activate:
 
@@ -64,17 +48,17 @@ With a `venv` installed and activated, you can rest assured that the Python inte
 
 **A word of warning:** it's easy to forget to run `$ source venv/bin/activate` when starting a new shell. If you find yourself running into strange bugs, make sure that you're using the virtual environment by checking the output of `$ which python`.
 
-Local Development
-==
+## Local Development
+
 Let's get a local version of our web app running.
 
-The first step is to download and install the Flask library: [instructions](http://flask.pocoo.org/docs/0.11/installation/).
+The first step is to download and install the Flask library: [instructions](http://flask.pocoo.org/docs/2.0/installation/).
 
 	$ pip install Flask
 
 Next you want to create a new script file that will be responsible for starting your web server. By convention this file is called `app.py`, but you can call it `server.py` or whatever you like.
 
-Start by following the instructions in the [Flask quickstart](http://flask.pocoo.org/docs/1.0/quickstart/) to build the most basic Flask app. Once you get it running, you should be able to open a browser and view your app at http://127.0.0.1:5000/ (read as "port 5000 on host 127.0.0.1").
+Start by following the instructions in the [Flask quickstart](http://flask.pocoo.org/docs/2.0/quickstart/) to build the most basic Flask app. Once you get it running, you should be able to open a browser and view your app at http://127.0.0.1:5000/ (read as "port 5000 on host 127.0.0.1").
 
 	$ python app.py
 	* Running on http://127.0.0.1:5000/ (Press CTRL+C to quit)
@@ -95,10 +79,10 @@ Once you've done that, on each page visit you'll see a freshly-generated word or
 
 It doesn't look super pretty, but we can clean that up later. At least it works!
 
-If you aren't able to get it working, and you're confused because you aren't getting error messages, make sure to enable [debug mode](http://flask.pocoo.org/docs/0.11/quickstart/#debug-mode) for your Flask app.
+If you aren't able to get it working, and you're confused because you aren't getting error messages, make sure to enable [debug mode](http://flask.pocoo.org/docs/2.0/quickstart/#debug-mode) for your Flask app.
 
-Push to Heroku
-==
+## Push to Heroku
+
 Now that we've got a working development version of our app, it's time to put it on the world wide web. We're going to use [Heroku](https://www.heroku.com/), a popular PaaS, or Platform-as-a-Service, to host our deployed web app.
 
 Luckily for us, Heroku has a great guide on getting started with Python apps. Follow this guide to prepare and deploy your app. You don't need to follow all of the steps. The most essential pieces you'll need are:
@@ -112,12 +96,14 @@ Luckily for us, Heroku has a great guide on getting started with Python apps. Fo
 
 Once you have all the pieces in place, publishing your app to Heroku is a single command:
 
-	$ git push heroku master
+```bash
+$ git subtree push --prefix Code heroku master
+```
 
 Now all your hard work is viewable, on the internet, all the time, for anyone! Rejoice!
 
-Help! It's Not Working and I Don't Know Why
-==
+## Help! It's Not Working and I Don't Know Why
+
 You may run into errors along the way. It doesn't always work smoothly the first time.
 
 That's fine, no problem. Stay calm, read the error message, and [check your Heroku logs](https://devcenter.heroku.com/articles/getting-started-with-python#view-logs).
@@ -126,13 +112,12 @@ Google error messages. Ask for help. We're going to get through this.
 
 Some issues to be aware of:
 
-- Heroku expects you to use [virtualenv](https://virtualenv.pypa.io/en/latest/) to manage dependencies with virtual environments
-- Heroku expects you to use [foreman](http://ddollar.github.io/foreman/) to start your app (it should be installed automatically with the Heroku Toolbelt)
+- Heroku expects you to use [virtualenv](https://docs.python.org/3/library/venv.html) to manage dependencies with virtual environments
 - Heroku prefers that you use the [Gunicorn HTTP server](http://gunicorn.org/)
-- But when you use Gunicorn locally, your Python errors will be "swallowed" (i.e. not displayed in the error page or server log). This [StackOverflow post](http://stackoverflow.com/questions/8950674/debugging-a-flask-app-running-in-gunicorn) covers the issue well, and how to ensure that you can still see errors in development.
+- When you use Gunicorn locally, your Python errors will be "swallowed" (i.e. not displayed in the error page or server log). This [StackOverflow post](http://stackoverflow.com/questions/8950674/debugging-a-flask-app-running-in-gunicorn) covers the issue well, and how to ensure that you can still see errors in development.
 
-Where to Go From Here
-==
+## Where to Go From Here
+
 All finished, with clean and readable code? No? Ok, go do that first. Then, make your web app look better and/or add more features.
 
 - Improve the style of your page (use a nice font, make it bigger, center it, etc.) with CSS.

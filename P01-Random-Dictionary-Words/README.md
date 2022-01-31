@@ -1,7 +1,4 @@
----
-title: Random Dictionary Words
-slug: random-dictionary-words
----
+# Random Dictionary Words
 
 Let's take a step back and remember what our ultimate goal is in this project: to generate new sentences using a body of text (a *corpus*) as the source. Seeing as that is the end goal, what is a good next logical step to move us in that direction?
 
@@ -10,13 +7,13 @@ We'll practice generating sentences from a body of text in a text file. The algo
 Here are some examples of this program in action:
 
 ```bash
-$ python dictionary_words.py 3
+$ python3 dictionary_words.py 3
 wuss paragrammatist avitaminosis.
 
-$ python dictionary_words.py 7
+$ python3 dictionary_words.py 7
 Nahuan semicynical Dendrobates madoqua semitangent rockstaff heptachronous.
 
-$ python dictionary_words.py 4
+$ python3 dictionary_words.py 4
 polyoicous lupulin pennyrot boree.
 ```
 
@@ -29,16 +26,17 @@ We will make several assumptions to reduce the complexity of this program:
 1. Word selection can be completely random and the word order does not matter.
 
 > [action]
-> Locate the `words` file on your computer. On a Macbook running OS X Yosemite, this file is located at `/usr/share/dict/words`.
+> Locate the `words` file on your computer. On a Mac running OS X, this file is located at `/usr/share/dict/words`.
 >
 > Use the `wc` (word count) command to show the number of lines, words, and bytes in the file.
->
+
 ```bash
 $ wc /usr/share/dict/words
 235886  235886 2493109 /usr/share/dict/words
 ```
-> Use the `tail` function to see what the end of the file looks like.
->
+
+Use the `tail` function to see what the end of the file looks like.
+
 ```bash
 $ tail -5 /usr/share/dict/words
 zythem
@@ -47,7 +45,7 @@ zythum
 Zyzomys
 Zyzzogeton
 ```
->
+
 A Zyzzogeton is a "rare genus of leafhopper endemic to South America", in case you were wondering.
 
 The file is nicely formatted with one word per line, alphabetized from top to bottom.  Your job is to use the words from this file to generate random "sentences". Of course, these aren't going to make much sense or be grammatically correct but that is fine for now.
@@ -56,8 +54,8 @@ The file is nicely formatted with one word per line, alphabetized from top to bo
 
 No worries, it's not that hard to learn. Here are some resources:
 
-- Read the [tutorial in the official docs](https://docs.python.org/2.7/tutorial/inputoutput.html)
-- Read the [Working with File Objects section in Dive into Python](http://www.diveintopython.net/file_handling/file_objects.html)
+- Read the [tutorial in the official docs](https://docs.python.org/3/tutorial/inputoutput.html)
+- Read the [Working with File Objects section in Dive into Python](https://diveintopython3.net/files.html)
 
 Try doing small bits of file I/O before moving onto the `words` file since it is so big. A convenient approach is to create your own sample file formatted in the same way as `words` with a short list of 5-10 words.
 
@@ -79,8 +77,7 @@ Finally, you have a few data types to choose from when you need to store the wor
 >
 
 
-Where to Go From Here
-==
+## Where to Go From Here
 
 > [challenge]
 >

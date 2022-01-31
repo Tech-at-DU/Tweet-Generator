@@ -1,7 +1,4 @@
----
-title: Stochastic Sampling
-slug: stochastic-sampling
----
+# Stochastic Sampling
 
 Now that we can generate histograms (word frequency distributions), the next step is to start pulling words out of the histogram to produce sentences.
 
@@ -16,23 +13,27 @@ Stochastic sampling means taking an element from a given collection at *random*.
 Your first task is to write a function that takes a histogram (however you've structured yours) and returns a single word, at random. It should not yet take into account the distributions of the words.
 >
 It should work something like this:
->
-	$ python sample.py one fish two fish red fish blue fish
-	two
->
-	$ python sample.py one fish two fish red fish blue fish
-	fish
->
-	$ python sample.py one fish two fish red fish blue fish
-	blue
->
+
+```bash
+$ python3 sample.py one fish two fish red fish blue fish
+two
+
+$ python3 sample.py one fish two fish red fish blue fish
+fish
+
+$ python3 sample.py one fish two fish red fish blue fish
+blue
+```
+
 As usual, you can name your files and functions however you like, this is merely a template. Additionally, if you'd rather provide a file as the command-line argument instead of a list of words, you can do that too:
->
-	$ python sample.py onefish.txt
-	fish
->
-	$ python sample.py onefish.txt
-	two
+
+```bash
+$ python3 sample.py onefish.txt
+fish
+
+$ python3 sample.py onefish.txt
+two
+```
 
 Once you have that working, can you prove that your code is truly random? Granted, proving randomness is much more difficult than disproving it, but you can get close. Is the probability that any word is selected the same as for any other word? In other words, given the example above, is the likelihood that `sample.py` will print the word `'red'` the same as the likelihood it will print `'fish'`?
 
@@ -44,11 +45,13 @@ For example, when using the sentence above, our sampling function should return 
 
 The probabilities for each word in the sample sentence are as follows:
 
+```bash
 	one  => 0.125
 	fish => 0.5
 	two  => 0.125
 	red  => 0.125
 	blue => 0.125
+```
 
 Or, put in percentages, 50% for `'fish'`, and 12.5% for all the rest.
 
@@ -56,10 +59,11 @@ Or, put in percentages, 50% for `'fish'`, and 12.5% for all the rest.
 >
 There are many ways to use relative probabilities to generate these words. See if you can devise your own strategy, and then make improvements to it by comparing your work with your peers and examples you find online.
 >
+
 Ready? Go code!
 
-Help! What is all this Stochastic Madness?
-==
+## Help! What is all this Stochastic Madness?
+
 If you're feeling overwhelmed by the frustrating indeterminacy of all this, you're not alone. One of the nice, pleasant, comforting things about computer programming is working with perfectly reproducible, empirical processes. In general, it is best to design software that will produce the same outputs when given the same inputs.
 
 Sometimes, though, we need randomness to help out. When we venture into the world of stochastic processes, we can no longer work with perfectly predictable outcomes, but instead must learn to work with relative probabilities.
@@ -68,16 +72,18 @@ If you're having trouble telling whether or not the probabilities you are design
 
 For example, to test that my probabilistic word sampler program was working correctly, I selected a random word from the histogram 10,000 times and then looked at how frequently each word was selected:
 
+```bash
 	blue => 1295
 	fish => 5048
 	red  => 1207
 	two  => 1209
 	one  => 1241
+```
 
 None of these numbers are clean, round numbers. But that's fine, because the relative probability reflects what I expect (and designed for): `'fish'` appears about 4 times as often as each of the other words, which all appear in roughly the same frequency. It's tough to prove perfect randomness, but so long as the sample size is big enough and the outcomes match what's expected, we can be mostly certain that we've reached correctness.
 
-Where to Go From Here
-==
+## Where to Go From Here
+
 Finished already? If you still have time left, make your code readable. Then optimize and experiment:
 
 - Optimize for speed of sampling (read time)
