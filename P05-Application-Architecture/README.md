@@ -77,8 +77,8 @@ I've created a starter code template to help guide you in refactoring your histo
 1. Run the unit tests again and fix any errors until they pass:
 
     ```bash
-    $ python dictogram_test.py  # standard unittest error formatting
-    $ python listogram_test.py  # pytest pretty formatting and more assertion info
+    $ python dictogram_test.py
+    $ python listogram_test.py
     ```
 
 1. You can also run the `dictogram.py` or `listogram.py` modules as a script to check your results while refactoring:
