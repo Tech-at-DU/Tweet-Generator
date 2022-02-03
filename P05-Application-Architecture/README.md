@@ -62,33 +62,26 @@ I've created a starter code template to help guide you in refactoring your histo
 1. Pull the starter code from the course's origin repository (assuming you have [set up your repository](https://github.com/Tech-at-DU/ACS-1120-Intro-Data-Structures/blob/master/Setup.md) correctly)
 
     ```bash
-    $ git pull course master
+    $ git pull upstream master
     ```
 
-2. Now navigate to the `source` directory and run the unit tests to see which methods are passing or failing:
+1. Now navigate to the `Code` directory and run the unit tests to see which methods are passing or failing. Make sure you activate your `virtualenv`!
 
     ```bash
+    $ source venv/bin/activate
     $ python dictogram_test.py  # tests for Dictogram class (subclass of dict)
     $ python listogram_test.py  # tests for Listogram class (subclass of list)
     ```
 
-3. Alternatively you can use `pytest` the run unit tests to see more readable and descriptive output:
-
-    ```bash
-    $ pip install pytest  # (only need to install once)
-    $ pytest dictogram_test.py  # tests for Dictogram class (subclass of dict)
-    ```
-
-4. Refactor your existing histogram functions into `Dictogram` and `Listogram` class instance methods
-
-5. Run the unit tests again and fix any errors until they pass:
+1. Refactor your existing histogram functions into `Dictogram` and `Listogram` class instance methods
+1. Run the unit tests again and fix any errors until they pass:
 
     ```bash
     $ python dictogram_test.py  # standard unittest error formatting
-    $ pytest dictogram_test.py  # pytest pretty formatting and more assertion info
+    $ python listogram_test.py  # pytest pretty formatting and more assertion info
     ```
 
-6. You can also run the `dictogram.py` or `listogram.py` modules as a script to check your results while refactoring:
+1. You can also run the `dictogram.py` or `listogram.py` modules as a script to check your results while refactoring:
 
     ```bash
     $ python dictogram.py
@@ -139,4 +132,15 @@ I've created a starter code template to help guide you in refactoring your histo
      'wood' occurs 4 times
     ```
 
-7. Once you finish implementing the `Dictogram` and `Listogram` classes and have made the respective unit tests pass, be sure to commit your solutions and push to GitHub!
+1. Once you finish implementing the `Dictogram` and `Listogram` classes and have made the respective unit tests pass, be sure to commit your solutions and push to GitHub!
+
+> [!TIP]
+>
+> Alternatively you can use `pytest` the run unit tests to see more readable and descriptive output:
+>
+> ```bash
+> $ pip install pytest  # (only need to install once)
+> $ pytest dictogram_test.py
+> ```
+>
+> Try it now before moving on to the next page of the tutorial!
