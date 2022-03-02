@@ -2,17 +2,30 @@ The time has come. We've reached the final step. It's time to connect take all o
 
 In this tutorial, we're going to create a fake Twitter account that we can program to tweet out our generated phrases. When we're finished, your web app will include a "Tweet This" button next to the generated quote which, when pressed, will tweet the quote to the fake Twitter account.
 
-There are a few steps involved to integrate with Twitter. For the purposes of this tutorial, we're going to use [Single-User OAuth](https://dev.twitter.com/oauth/overview/single-user) to authenticate our application with the Twitter API, allowing us to post tweets to our fake user account.
+Begin by completing the following steps to ensure we can integrate with Twitter:
 
-Ok, let's get set up. Start by completing the following steps:
-
-- Create a new Twitter account at [https://twitter.com/signup](https://twitter.com/signup)
-- Create a new Twitter application at [https://apps.twitter.com/](https://apps.twitter.com/)
-- Generate API tokens ([docs](https://dev.twitter.com/oauth/overview/application-owner-access-tokens))
+1. Create a new Twitter account by visiting <https://twitter.com/signup> and clicking the blue `Sign Up with Phone or Email` button.
+2. Fill out the `Name` field
+3. Click the blue `Use email instead` link
+4. Fill out the `Email` field using your `dominican.edu` student email address. NO EXCEPTIONS!
+5. Please don't ask your instructor to amend this requirement; a new student account is required for this project.
+6. Confirm your date of birth.
+7. Submit and complete onboarding process for your new Twitter account.
+8. Request developer access to the Twitter API at <https://developer.twitter.com/>.
+9. When prompted if you are a student, be sure to say yes!
+10. Submit request for developer access
+11. Watch your email inbox for a confirmation that developer access has been granted.
+12. Create a new project named `Tweet Generator` in the developer portal.
+13. Click your project's name under `Projects and Apps`.
+14. Find `User authentication settings` at the bottom the `App details` page and click the black `Edit` button.
+15. Set the `OAuth 1.0a` switch to the on posi
+16. Below, in `OAUTH 1.0A SETTINGS`, be sure to choose `Read and Write` under `App permissions`.
+17. Under `Callback URL` and `Website URL`, paste the URL for your Heroku instance and click Save.
+18. Generate API tokens for the `Tweet Generator` project ([docs](https://developer.twitter.com/en/docs/authentication/oauth-2-0)
 
 To send an authenticated request to the Twitter API, you need (at least) 5 things:
 
-1. The API endpoint to send a request to (in this case, we'll just be using the [POST statuses/update endpoint](https://dev.twitter.com/rest/reference/post/statuses/update) of the REST API)
+1. The API endpoint to send a request to (our third-party library keeps track of this --- but it's `https://api.twitter.com/2/tweets` )
 2. The consumer key for your application (tells the Twitter API which application is sending the request)
 3. The consumer secret for your application (used to sign the request)
 4. The access token key for your application (tells the Twitter API which user is sending the request)
@@ -66,7 +79,7 @@ TWITTER_ACCESS_TOKEN=youraccesstokenhash
 TWITTER_ACCESS_TOKEN_SECRET=youraccesstokensecrethash
 ```
 
-Then, in `twitter.py`, import the `dotenv` module (you'll need to install it with `pip`, of course) and load your `.env` file:
+Then, in `twitter.py`, import the `dotenv` module (you'll need to install it by running `pip install python-dotenv`, of course). Then, load your `.env` file at the very top of `twitter.py`, before any other import statements:
 
 ```python
 import dotenv
@@ -76,8 +89,8 @@ dotenv.load_dotenv('.env')
 After doing that, your `os.environ` dictionary should contain all of the variables defined in `.env`. Make sure that they do by calling `os.environ.get()` for each of the variable names.
 
 > [!INFO]
->
-> **Hint**: If you are running into errors, are you sure that you installed the `dotenv` package to your virtual environment? Make sure that you have activated your virtual environment with `$ source venv/bin/activate` and that you see `dotenv` in the list of packages printed by `$ pip list`._
+
+> **Hint**: If you are running into errors, are you sure that you installed the `python-dotenv` package to your virtual environment? Make sure that you have activated your virtual environment with `$ source venv/bin/activate` and that you see `python-dotenv` in the list of packages printed by `$ pip list`._
 
 Finally, to make sure that you don't ever commit `.env` to your version control repository, add it to your `.gitignore` file with the following command:
 
@@ -91,15 +104,26 @@ We've just solved a core security issue in software development: making private 
 
 Be aware that because you don't include `.env` in your repository, when you push your application to Heroku, it won't have access to the same environment variables. To resolve this issue, you need to [set environment variables explicitly for your Heroku instance](https://devcenter.heroku.com/articles/config-vars).
 
-## Interacting with the Twitter API
+To set environment variables on Heroku, use the Heroku Toolkit we installed in a prior step of the tutorial to inform the instance of new config vars:
+
+```bash
+$ heroku config:set TWITTER_CONSUMER_KEY=yourconsumerkeyhash
+$ heroku config:set TWITTER_CONSUMER_SECRET=yourconsumersecrethash
+$ heroku config:set TWITTER_ACCESS_TOKEN=youraccesstokenhash
+$ heroku config:set TWITTER_ACCESS_TOKEN_SECRET=youraccesstokensecrethash
+```
+
+Good work! You won't need to do that again unless you regenerate your project's keys via the Twitter Developer Dashboard website.
+
+### Interacting with the Twitter API
 
 By now, you should have a `twitter.py` script that looks something like the following:
 
 ```python
 import os
-import dotenv
+import dotenv               # Always near the top!
+dotenv.load_dotenv('.env')  # Load environment variables ASAP.
 
-dotenv.load_dotenv('.env')
 
 consumer_key = os.environ.get('TWITTER_CONSUMER_KEY')
 consumer_secret = os.environ.get('TWITTER_CONSUMER_SECRET')
@@ -109,10 +133,10 @@ access_token_secret = os.environ.get('TWITTER_ACCESS_TOKEN_SECRET')
 
 The next step is to send a request to the Twitter API. To do this, we'll be using our old friend the [requests library](http://www.python-requests.org/) and its corresponding OAuth library, [requests-oauthlib](https://github.com/requests/requests-oauthlib).
 
-Start off by installing them both:
+Start off by installing it:
 
 ```bash
-$ pip install requests requests_oauthlib
+$ pip install requests requests-oauthlib
 ```
 
 Then, add the following code to `twitter.py` to create a new authorized session:
@@ -130,13 +154,13 @@ We'll use the `client` object to send OAuth-signed requests to Twitter. Let's tr
 
 ```python
 # The URL endpoint to update a status (i.e. tweet)
-url = 'https://api.twitter.com/1.1/statuses/update.json'
+url = 'https://api.twitter.com/2/tweets'
 
 # The contents of status (i.e. tweet text)
 status = 'If you are reading this on Twitter, the API request worked!'
 
 # Send a POST request to the url with a 'status' parameter
-resp = session.post(url, { 'status': status })
+resp = session.post(url, json={ 'text': status })
 
 # Show the text from the response
 print(resp.text)
@@ -154,18 +178,18 @@ Now that we've got the API integration working, let's wrap it up into a nice uti
 
 ```python
 def tweet(status):
-  resp = session.post(url, { 'status': status })
-  return resp.text
+    resp = session.post(url, json={ 'text': status })
+    return resp.text
 ```
 
 Now we can easily use this function from anywhere else in our app and tweet away! We can even tweet from the REPL:
 
 ```bash
 $ python
->>> from twitter import tweet
->>> tweet('Chirp.')
+>>> import twitter
+>>> twitter.tweet('Chirp.')
 ...
->>> tweet('Blirp.')
+>>> twitter.tweet('Blirp.')
 ...
 ```
 
@@ -180,10 +204,11 @@ Let's start with the new route. It will look a lot like our original route, exce
 
 ```python
 @app.route('/tweet', methods=['POST'])
-def tweet():
+def tweet(request):
     status = request.form['sentence']
     print(status)
 ```
+
 To send a POST request from `index.html`, add a `<form>` tag with an `action` attribute set to `/tweet` (the route to post data to). Nested within your form, add a hidden `<input>` tag with a name of `sentence` and a value equal to the generated sentence. Here's an example:
 
 ```html
@@ -196,13 +221,13 @@ To send a POST request from `index.html`, add a `<form>` tag with an `action` at
 
 With this code in our HTML, fire up the web server, open a browser, and click on the "Tweet this" button. You should see the value of the generated sentence printed to your server log console.
 
-*Note: to do this, you will likely need to import the `request` object from `flask` in addition to the `Flask` and `render_template` functions.*
+_Note: to do this, you will likely need to import the `request` object from `flask` in addition to the `Flask` and `render_template` functions._
 
 Now that we have access to the sentence from within the `/tweet` route, all we have to do is use our `twitter.tweet()` function to actually post it to Twitter! Update the route to the following:
 
 ```python
 @app.route('/tweet', methods=['POST'])
-def tweet():
+def tweet(request):
     status = request.form['quote']
     twitter.tweet(status)
     return redirect('/')
