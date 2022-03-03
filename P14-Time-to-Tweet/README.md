@@ -37,7 +37,7 @@ That's a lot of jargon. If your head is spinning, no worries. It's not critical 
 
 The important pieces you need for now are those keys and secrets. The first thing we'll do is add those values to our application.
 
-## Adding Keys and Secrets
+# Adding Keys and Secrets
 
 Create a new file in your project called `twitter.py`. In this file, we'll write code to create authenticated requests to send to the Twitter API and define a function to let our main application code send tweets.
 
@@ -115,7 +115,7 @@ $ heroku config:set TWITTER_ACCESS_TOKEN_SECRET=youraccesstokensecrethash
 
 Good work! You won't need to do that again unless you regenerate your project's keys via the Twitter Developer Dashboard website.
 
-### Interacting with the Twitter API
+## Interacting with the Twitter API
 
 By now, you should have a `twitter.py` script that looks something like the following:
 
@@ -193,7 +193,7 @@ $ python
 ...
 ```
 
-## Add a Tweet Button to the Web App
+# Add a Tweet Button to the Web App
 
 The final step of this tutorial is to add a "Tweet This" button to the web application. Two things are needed to accomplish this task:
 
@@ -204,7 +204,7 @@ Let's start with the new route. It will look a lot like our original route, exce
 
 ```python
 @app.route('/tweet', methods=['POST'])
-def tweet(request):
+def tweet():
     status = request.form['sentence']
     print(status)
 ```
@@ -227,7 +227,7 @@ Now that we have access to the sentence from within the `/tweet` route, all we h
 
 ```python
 @app.route('/tweet', methods=['POST'])
-def tweet(request):
+def tweet():
     status = request.form['quote']
     twitter.tweet(status)
     return redirect('/')
@@ -237,7 +237,7 @@ Again, to make this work you'll need to also import the `redirect` function from
 
 With that in place, we finally have a fully functional Twitter integration complete with a user interface! Time to celebrate! Or, if you prefer, keep building more features... ;D
 
-## Stretch Goals
+# Stretch Goals
 
 - Seed sentences with a word (build backwards and forwards). Make this functionality available via a new Flask route
 - Make Twitter bots "listen" and respond to other bots when they tweet a certain keyword (or set of keywords). Use the same keyword to seed the response. (Make sure to time-limit this otherwise could create infinite feedback loop between bots and get them booted from the API)
