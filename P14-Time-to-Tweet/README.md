@@ -228,7 +228,7 @@ Now that we have access to the sentence from within the `/tweet` route, all we h
 ```python
 @app.route('/tweet', methods=['POST'])
 def tweet():
-    status = request.form['quote']
+    status = request.form['sentence']
     twitter.tweet(status)
     return redirect('/')
 ```
