@@ -1,6 +1,6 @@
 # Tweet Generator
 
-<p align="center"><img src="https://user-images.githubusercontent.com/371368/233214484-5846e2c4-b85d-4068-acde-dfc555871189.jpg" height="50%"></p>
+<p align="center"><img src="https://user-images.githubusercontent.com/371368/233214484-5846e2c4-b85d-4068-acde-dfc555871189.jpg"></p>
 
 _Create a web app that generates approximately grammatical sentences based on a corpus of your choosing!_
 
