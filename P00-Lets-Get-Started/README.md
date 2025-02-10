@@ -11,7 +11,7 @@ We'll build this step-by-step; diving into the programming and Python you need a
 3. Implement grammar rules parsed from the text of a large document set.
 4. Build data structures including linked lists, hash tables, stacks, queues, and heaps to store the words and sentences.
 5. Analyze the inner workings and performance tradeoffs of each data structure.
-6. Deploy your language model to a Flask web server on Heroku and connect it to Twitter to let users tweet their favorite results.
+6. Deploy your language model to a Flask web server on Render and connect it to Twitter to let users tweet their favorite results.
 
 ## Learning Outcomes
 
@@ -52,7 +52,7 @@ You don't need to learn all this before you start, you can learn it as you need 
 As you go through this tutorial, you will regularly update your progress on Github and through a deployed solution.
 
 - You are required to commit each new feature or update to Github. These commits represent the minimum commit frequency; feel free to commit more often.
-- You will also regularly deploy updates to your Flask web server on Heroku.
+- You will also regularly deploy updates to your Flask web server on Render.
 
 > [!ATTENTION]
 > This tutorial uses starter code:

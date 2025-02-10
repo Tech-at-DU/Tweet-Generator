@@ -20,7 +20,7 @@ Begin by completing the following steps to ensure we can integrate with Twitter:
 14. Find `User authentication settings` at the bottom the `App details` page and click the black `Edit` button.
 15. Set the `OAuth 1.0a` switch to the on posi
 16. Below, in `OAUTH 1.0A SETTINGS`, be sure to choose `Read and Write` under `App permissions`.
-17. Under `Callback URL` and `Website URL`, paste the URL for your Heroku instance and click Save.
+17. Under `Callback URL` and `Website URL`, paste the URL for your Render instance and click Save.
 18. Generate API tokens for the `Tweet Generator` project ([docs](https://developer.twitter.com/en/docs/authentication/oauth-2-0)
 
 To send an authenticated request to the Twitter API, you need (at least) 5 things:
@@ -102,16 +102,16 @@ Be sure to commit changes to your `.gitignore` file.
 
 We've just solved a core security issue in software development: making private values accessible to a program without publicly exposing them.
 
-Be aware that because you don't include `.env` in your repository, when you push your application to Heroku, it won't have access to the same environment variables. To resolve this issue, you need to [set environment variables explicitly for your Heroku instance](https://devcenter.heroku.com/articles/config-vars).
+Be aware that because you don't include `.env` in your repository, when you push your application to Render, it won't have access to the same environment variables. To resolve this issue, you need to [set environment variables explicitly for your Render instance](https://render.com/docs/configure-environment-variables).
 
-To set environment variables on Heroku, use the Heroku Toolkit we installed in a prior step of the tutorial to inform the instance of new config vars:
+<!-- To set environment variables on Heroku, use the Heroku Toolkit we installed in a prior step of the tutorial to inform the instance of new config vars:
 
 ```bash
 $ heroku config:set TWITTER_CONSUMER_KEY=yourconsumerkeyhash
 $ heroku config:set TWITTER_CONSUMER_SECRET=yourconsumersecrethash
 $ heroku config:set TWITTER_ACCESS_TOKEN=youraccesstokenhash
 $ heroku config:set TWITTER_ACCESS_TOKEN_SECRET=youraccesstokensecrethash
-```
+``` -->
 
 Good work! You won't need to do that again unless you regenerate your project's keys via the Twitter Developer Dashboard website.
 

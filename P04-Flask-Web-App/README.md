@@ -7,7 +7,7 @@ In this tutorial, we're going to use the [Flask](http://flask.pocoo.org/) micro-
 
 If you're unfamiliar with Flask, that's fine – you'll be able to pick it up quickly. There are [lots](http://blog.miguelgrinberg.com/post/the-flask-mega-tutorial-part-i-hello-world) [of](https://realpython.com/blog/python/flask-by-example-part-1-project-setup/) [resources](https://exploreflask.com/) to get you up and running quickly. For the purposes of this tutorial, you'll need to learn only the basics of Flask. If you want to learn more (to make your app even better), by all means go ahead and do so.
 
-The goal for this tutorial is to create a web app with an index or home route that displays a freshly-generated word with each page load. We'll develop this web application locally first, and then publish to Heroku later so that anyone on the web can see it.
+The goal for this tutorial is to create a web app with an index or home route that displays a freshly-generated word with each page load. We'll develop this web application locally first, and then publish to Render later so that anyone on the web can see it.
 
 ## Environment Setup
 
@@ -86,23 +86,20 @@ It doesn't look super pretty, but we can clean that up later. At least it works!
 
 If you aren't able to get it working, and you're confused because you aren't getting error messages, make sure to enable [debug mode](http://flask.pocoo.org/docs/2.0/quickstart/#debug-mode) for your Flask app.
 
-## Push to Heroku
+## Push to Render
 
-Now that we've got a working development version of our app, it's time to put it on the world wide web. We're going to use [Heroku](https://www.heroku.com/), a popular PaaS, or Platform-as-a-Service, to host our deployed web app.
+Now that we've got a working development version of our app, it's time to put it on the world wide web. We're going to use [Render](https://www.render.com/), a popular PaaS, or Platform-as-a-Service, to host our deployed web app.
 
-Luckily for us, Heroku has a great guide on getting started with Python apps. Follow this guide to prepare and deploy your app. You don't need to follow all of the steps. The most essential pieces you'll need are:
+Luckily for us, Render has a great guide on getting started with Python apps. Follow this guide to prepare and deploy your app. You don't need to follow all of the steps. The most essential pieces you'll need are:
 
 - A local [Git](https://git-scm.com/) repository for your source code
-- A [Heroku account](https://signup.heroku.com/www-home-top)
-- [Heroku Toolbelt](https://toolbelt.heroku.com/) installed
-- A [Procfile](https://devcenter.heroku.com/articles/procfile) with a `web` process type defined
-- A list of [package dependencies defined](https://devcenter.heroku.com/articles/getting-started-with-python#declare-app-dependencies)
-- A [specified Python runtime](https://devcenter.heroku.com/articles/python-runtimes)
+- A [Render account](https://dashboard.render.com/register)
+- An installation of Gunicorn, a package that helps Python interpret requests and responses from the web: run `pip install gunicorn` in your project's activate `venv`
+- The [Your First Deploy](https://render.com/docs/your-first-deploy) guide to releasing an app for the first time on Render. When asked for a service type, choose Web Service.
 
-Once you have all the pieces in place, publishing your app to Heroku is a single command:
+Once you have all the pieces in place, every time you push your code to GitHub, your deployed instance on Render will be updated and refreshed, too.
 
-For those of you with `app.py` in the root of your folder, please run:
-
+<!--
 ```bash
 $ git push heroku master
 ```
@@ -112,21 +109,24 @@ If you're running the code from within a subfolder in your project, please run:
 ```bash
 $ git subtree push --prefix Code heroku master
 ```
+-->
 
 Now all your hard work is viewable, on the internet, all the time, for anyone! Rejoice!
+
+Once your deployment is up and running, be sure to install the [Render CLI](https://render.com/docs/cli) for use in this class and others.
 
 ## It's Not Working and I Don't Know Why
 
 You may run into errors along the way. It doesn't always work smoothly the first time.
 
-That's fine, no problem. Stay calm, read the error message, and [check your Heroku logs](https://devcenter.heroku.com/articles/getting-started-with-python#view-logs).
+That's fine, no problem. Stay calm, read the error message, and [check your Render logs](https://render.com/docs/logging).
 
 Google error messages. Ask for help. We're going to get through this.
 
 Some issues to be aware of:
 
-- Heroku expects you to use [virtualenv](https://docs.python.org/3/library/venv.html) to manage dependencies with virtual environments
-- Heroku prefers that you use the [Gunicorn HTTP server](http://gunicorn.org/)
+- Render expects you to use [virtualenv](https://docs.python.org/3/library/venv.html) to manage dependencies with virtual environments
+- Render prefers that you use the [Gunicorn HTTP server](http://gunicorn.org/) &mdash; did you run `pip install gunicorn` in an active virtual environment, as instructed in the above steps?
 - When you use Gunicorn locally, your Python errors will be "swallowed" (i.e. not displayed in the error page or server log). This [StackOverflow post](http://stackoverflow.com/questions/8950674/debugging-a-flask-app-running-in-gunicorn) covers the issue well, and how to ensure that you can still see errors in development.
 
 ## Where to Go From Here
