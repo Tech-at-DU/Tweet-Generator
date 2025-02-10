@@ -18,7 +18,7 @@ Begin by completing the following steps to ensure we can integrate with Twitter:
 12. Create a new project named `Tweet Generator` in the developer portal.
 13. Click your project's name under `Projects and Apps`.
 14. Find `User authentication settings` at the bottom the `App details` page and click the black `Edit` button.
-15. Set the `OAuth 1.0a` switch to the on posi
+15. Set the `OAuth 1.0a` switch to the on position.
 16. Below, in `OAUTH 1.0A SETTINGS`, be sure to choose `Read and Write` under `App permissions`.
 17. Under `Callback URL` and `Website URL`, paste the URL for your Render instance and click Save.
 18. Generate API tokens for the `Tweet Generator` project ([docs](https://developer.twitter.com/en/docs/authentication/oauth-2-0)
