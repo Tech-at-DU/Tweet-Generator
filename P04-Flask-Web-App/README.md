@@ -93,7 +93,7 @@ Now that we've got a working development version of our app, it's time to put it
 Luckily for us, Render has a great guide on getting started with Python apps. Follow this guide to prepare and deploy your app. You don't need to follow all of the steps. The most essential pieces you'll need are:
 
 - A local [Git](https://git-scm.com/) repository for your source code
-- A [Render account](https://dashboard.render.com/register)
+- A [Render account](https://dashboard.render.com/register) &mdash; be sure to validate your email before your first deployment!
 - An installation of Gunicorn, a package that helps Python interpret requests and responses from the web: run `pip install gunicorn` in your project's activate `venv`
 - The [Your First Deploy](https://render.com/docs/your-first-deploy) guide to releasing an app for the first time on Render. When asked for a service type, choose Web Service.
 
