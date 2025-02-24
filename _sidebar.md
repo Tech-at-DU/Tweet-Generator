@@ -13,4 +13,4 @@
   - [12. Creating a Corpus](P11-Creating-a-Corpus/README.md)
   - [13. Parsing and Text Clean Up](P12-Parsing-Text-Clean-Up/README.md)
   - [14. Tokenization](P13-Tokenization/README.md)
-  - [15. Time to Tweet!](P14-Time-to-Tweet/README.md)
+  <!-- [15. Time to Tweet!](P14-Time-to-Tweet/README.md) -->
