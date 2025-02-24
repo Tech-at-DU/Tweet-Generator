@@ -20,4 +20,4 @@ _Create a web app that **generates approximately grammatical sentences** based o
 1. [Creating a Corpus](P11-Creating-a-Corpus/README.md)
 1. [Parsing and Text Clean Up](P12-Parsing-Text-Clean-Up/README.md)
 1. [Tokenization](P13-Tokenization/README.md)
-1. [Time to Tweet!](P14-Time-to-Tweet/README.md)
+<!-- 1. [Time to Tweet!](P14-Time-to-Tweet/README.md) -->
